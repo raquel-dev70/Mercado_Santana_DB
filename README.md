@@ -26,8 +26,8 @@ Definidas nativamente como inteiros para garantir alta performance nas operaçõ
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 2. Coerência DER vs. Modelo Lógico:
-![DER](/.modelo_conceitual.png)
-![MODELO LOGICO](/.modelo_logico.png)
+![DER](modelo%20conceitual.png)
+![MODELO LOGICO](modelo%20logico.png)
 
 **O mapeamento das tabelas funcionou?**
 Sim! Nos relacionamentos "refere-se" e "possui", o mapeamento funcionou perfeitamente. O relacionamento "refere-se" serve para ligar as tabelas `Produto`, `Item_Entrada` e `Item_Venda` através de chaves estrangeiras (`FK`), identificando pelo ID qual mercadoria está sendo movimentada. Já o relacionamento "possui" liga a tabela `Venda` com a tabela `Item_Venda`, identificando exatamente em qual cupom fiscal aquela compra foi registrada, não deixando nenhuma informação solta no sistema do mercado.
