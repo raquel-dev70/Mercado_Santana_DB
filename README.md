@@ -26,7 +26,7 @@ Definidas nativamente como inteiros para garantir alta performance nas operaçõ
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 2. Coerência DER vs. Modelo Lógico:
-![DER](/.modelo_conceitual.png)
+![DER](./modelo_conceitual.png)
 ![MODELO LOGICO](/.modelo_logico.png)
 
 **O mapeamento das tabelas funcionou?**
