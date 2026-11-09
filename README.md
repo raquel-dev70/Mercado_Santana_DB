@@ -40,7 +40,7 @@ Essa restrição impede que seja registrado um item de venda com um id_produto i
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 4. Seção de BI & IA: 
-**Informações das tabelas**
+**Informações comparativas entre a pesquisa de campo e a massa sintética de teste**
 
 | Informação | Pesquisa de campo | Massa sintética de teste |
 | :--- | :--- | :--- |
@@ -54,10 +54,8 @@ Essa restrição impede que seja registrado um item de venda com um id_produto i
 | **Devoluções** | Aproximadamente 12 por mês | Não registradas na massa |
 
 
-
-
 **Consultas SQL gerenciais**:
-**G01 a G06 nas tabelas do script SQL**
+**Consultas G01 a G06 aplicadas às tabelas do script SQL**
 
 **G01-Quantidades de produtos cadastrados:**
 ```sql
@@ -69,7 +67,7 @@ FROM produtos;
 **G02-Quantidades de entrada por mês:**
 ```sql
 SELECT
-   DATE_FORMA(data_entrada,'%Y-%m')AS mes,
+   DATE_FORMAT(data_entrada,'%Y-%m')AS mes,
    COUNT(*) AS total_entradas
 FROM entrada
 GROUP BY DATE_FORMAT(data_entrada,'%Y-%m')
@@ -92,7 +90,7 @@ SELECT
  DATE_FORMAT(data_entrada,'%Y-%m')AS mes,
  SUM(valor_total)AS total_compras
 FROM entrada
-GROUP DATE_FORMAT(data_entrada,'%Y-%m')
+GROUP BY DATE_FORMAT(data_entrada,'%Y-%m')
 ORDER BY mes;
 ```
 G05-Produtos que mais vendidos:
