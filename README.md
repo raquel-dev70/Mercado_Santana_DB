@@ -42,16 +42,16 @@ Essa restrição impede que seja registrado um item de venda com um id_produto i
 ## 4. Seção de BI & IA: 
 **Informações das tabelas**
 
-       | Informação | Pesquisa de campo | Massa sintética de teste |
+| Informação | Pesquisa de campo | Massa sintética de teste |
 | :--- | :--- | :--- |
-| *Produtos ativos/cadastrados* | Mais de 50; sem contagem exata | 52 produtos |
-| *Entradas por mês* | 20 (anotação) | 20 entradas em outubro/2026 |
-| *Vendas por mês* | 200 (anotação; período/significado a confirmar) | 200 vendas em outubro/2026 |
-| *Faturamento mensal* | Aproximadamente R$ 36.000,00 | R$ 36.257,17 |
-| *Ticket médio* | Não informado | R$ 181,29 |
-| *Valor de compras* | Não informado | R$ 29.079,24 |
-| *Produto de maior giro* | "Pães" | Pão francês: 1.020 unidades vendidas |
-| *Devoluções* | Aproximadamente 12 por mês | Não registradas na massa |
+| **Produtos ativos/cadastrados** | Mais de 50; sem contagem exata | 52 produtos |
+| **Entradas por mês** | 20 (anotação) | 20 entradas em outubro/2026 |
+| **Vendas por mês** | 200 (anotação; período/significado a confirmar) | 200 vendas em outubro/2026 |
+| **Faturamento mensal** | Aproximadamente R$ 36.000,00 | R$ 36.257,17 |
+| **Ticket médio** | Não informado | R$ 181,29 |
+| **Valor de compras** | Não informado | R$ 29.079,24 |
+| **Produto de maior giro** | "Pães" | Pão francês: 1.020 unidades vendidas |
+| **Devoluções** | Aproximadamente 12 por mês | Não registradas na massa |
 
 
 
