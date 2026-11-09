@@ -54,13 +54,12 @@ Dessa forma, a documentação do README precisa apresentar uma relação coerent
 
 ## 4. Conclusão do Relatório
 
-A Inteligência Artificial foi utilizada como ferramenta de apoio na geração de ideias, sugestões e rascunhos iniciais. Durante o desenvolvimento do projeto, também foram realizados testes e consultas em diferentes ferramentas de IA, como Gemini e ChatGPT. Entretanto, algumas respostas apresentaram inconsistências e precisaram ser analisadas, questionadas e corrigidas.
+A Inteligência Artificial foi utilizada como ferramenta de apoio durante o desenvolvimento do projeto, principalmente por meio do ChatGPT, para a geração de ideias, sugestões, esclarecimento de dúvidas e elaboração de rascunhos iniciais. Também foram realizados testes e consultas com outras ferramentas, como o Gemini. Entretanto, algumas respostas apresentaram inconsistências e precisaram ser analisadas, questionadas e corrigidas.
 
-Assumi uma participação ativa na organização, análise e revisão de diversos detalhes técnicos do projeto, desde a documentação até a estrutura do banco de dados. Esse processo exigiu atenção à modelagem das tabelas, aos relacionamentos, à precisão dos valores financeiros, às regras de negócio e à coerência entre os códigos e a documentação.
+Assumi uma participação ativa na organização, análise e revisão dos detalhes técnicos do projeto, desde a documentação até a estrutura do banco de dados. Esse processo envolveu a modelagem das tabelas, os relacionamentos, a definição dos tipos de dados, a precisão dos valores financeiros, as regras de negócio e a elaboração das consultas SQL.
 
-A experiência demonstrou que utilizar Inteligência Artificial não significa aceitar todas as respostas como corretas. Foi necessário buscar esclarecimentos, compreender as orientações, testar possibilidades e realizar correções para alcançar um resultado coerente com a proposta do Mercado Santana.
+A experiência demonstrou que o desenvolvimento do projeto exigiu dedicação, paciência e atenção aos detalhes. Foi necessário analisar informações, esclarecer dúvidas, testar possibilidades e realizar diversas correções para garantir a coerência entre a documentação, o banco de dados e as consultas SQL do Mercado Santana. Esse trabalho reforçou a importância de compreender cada etapa, em vez de simplesmente aceitar as sugestões fornecidas pela Inteligência Artificial.
 
-Por fim, o projeto contribuiu para ampliar meus conhecimentos técnicos, desenvolver meu pensamento crítico e compreender a importância da revisão humana na utilização de ferramentas de Inteligência Artificial.
+Por fim, o projeto contribuiu para ampliar meus conhecimentos técnicos, desenvolver meu pensamento crítico e fortalecer minha autonomia na análise e resolução de problemas. Também compreendi a importância da revisão humana e da responsabilidade na utilização de ferramentas de Inteligência Artificial.
 
-
-**Registro de responsabilidade:** A utilização das ferramentas de IA foi complementar ao desenvolvimento. As análises, verificações, correções e decisões técnicas descritas neste documento foram realizadas mediante avaliação humana.
+Registro de responsabilidade: A Inteligência Artificial foi utilizada como recurso complementar ao desenvolvimento. As análises, verificações, correções e decisões técnicas foram realizadas mediante avaliação humana, com responsabilidade sobre o conteúdo final apresentado.
