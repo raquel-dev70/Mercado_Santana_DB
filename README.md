@@ -1,0 +1,57 @@
+## 1. Justificativas Técnicas da Modelagem — Mercado Santana : 
+Nos banco de dados foi estruturado com as entidades Categoria, Produto, Fornecedor, Entrada, Item_Entrada, Venda, Item_Venda e Movimentacao_Estoque. As entidades Item_Entrada e Item_Venda possuem atributos do tipo FLOAT para representar valores numéricos, como quantidades e valores financeiros. Já as chaves estrangeiras (FK) foram definidas com o tipo INT, permitindo estabelecer os relacionamentos entre as tabelas e garantir a integridade dos dados.
+
+**1. Movimentacao_Estoque:** É responsável pelo controle das entradas, saídas, custos e demais movimentações dos produtos no estoque.
+
+**1.1 Item_Entrada e Item_Venda:** Representam os itens relacionados às operações de compra e venda, permitindo registrar as quantidades e os valores correspondentes a cada operação.
+
+**1.2 Tipo de dado FLOAT:** Foi utilizado para representar valores numéricos com casas decimais, permitindo registrar quantidades e valores relacionados às operações de compra, venda e movimentação de estoque.
+
+**1.3 Chaves estrangeiras (FK) do tipo INT:** Foram utilizadas para estabelecer os relacionamentos entre as tabelas por meio dos identificadores correspondentes, permitindo vincular os registros e preservar a integridade referencial do banco de dados.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 2. Coerência DER vs. Modelo Lógico:
+**O mapeamento das tabelas funcionou?**
+Sim! Nos relacionamentos "refere-se" e "possui", o mapeamento funcionou perfeitamente. O relacionamento "refere-se" serve para ligar as tabelas `Produto`, `Item_Entrada` e `Item_Venda` através de chaves estrangeiras (`FK`), identificando pelo ID qual mercadoria está sendo movimentada. Já o relacionamento "possui" liga a tabela `Venda` com a tabela `Item_Venda`, identificando exatamente em qual cupom fiscal aquela compra foi registrada, não deixando nenhuma informação solta no sistema do mercado.
+
+**Como as linhas do desenho viraram código?** 
+No código, a tabela produto se liga à entidade pai por meio da coluna id_categoria INT NOT NULL, que atua como chave estrangeira.
+
+**As tabelas de "Item" estão certas?** 
+ Na transposição do modelo conceitual para o lógico, foram criadas corretamente as tabelas intermediárias item_venda e item_entrada. Elas funcionam unindo as chaves estrangeiras (id_produto com id_venda ou id_entrada) para registrar os dados de cada movimentação, como no caso do cupom ou nota fiscal, mapeando atributos específicos como quantidade, preco_unitario e subtotal.
+ 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 3. Decisões de Engenharia de Dados: 
+ **1. Escolha da Tipagem para Valores Monetários (DECIMAL vs FLOAT):**
+Utilizamos o tipo **`DECIMAL(10,2)`** em campos como `preco_venda` e `valor_total` em vez do tipo `FLOAT`. Não usamos ambos porque queremos precisão financeira nos dados de custos e despesas. Essa decisão garante que atributos como `custo_unitario`, `preco_unitario` e os resultados de valores totais como `subtotal` fiquem com os valores exatos, sem erros de arredondamento no fechamento do caixa do mercado.
+
+**2. Uso do Mecanismo de Armazenamento (Engine):**
+Foi utilizada a configuração `AUTO_INCREMENT` nas chaves primárias (`PRIMARY KEY`), permitindo que os identificadores sejam gerados automaticamente pelo banco de dados a cada novo registro. Os campos foram definidos com o tipo `INT`, garantindo a identificação única dos registros. Esses identificadores também permitem estabelecer relacionamentos entre as tabelas por meio das chaves estrangeiras (`FOREIGN KEY`), como `id_produto` e `id_venda`.
+
+**3. Padronização de Caracteres e Acentuação:**
+Na tabela Categoria, foi utilizada a configuração DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci, permitindo o armazenamento adequado de caracteres especiais, acentos e diferentes idiomas. O conjunto de caracteres utf8mb4 oferece suporte a uma ampla variedade de caracteres, incluindo letras acentuadas.
+Já a configuração utf8mb4_0900_ai_ci utiliza uma regra de comparação que ignora diferenças entre letras maiúsculas e minúsculas (ci) e diferenças de acentuação (ai). Dessa forma, ao pesquisar uma categoria como Limpeza, o banco de dados também consegue reconhecer variações como limpeza e LIMPEZA, facilitando as consultas e a localização dos registros.
+
+
+**4. Estrutura de Chaves e Relacionamentos:**
+A estrutura das tabelas Item_Entrada e Item_Venda permite estabelecer relacionamentos do tipo Muitos para Muitos (N) entre produtos e operações de entrada e venda. Para isso, foram utilizadas chaves estrangeiras (FOREIGN KEY), como a restrição CONSTRAINT item_venda_ibfk_1 FOREIGN KEY (id_produto) REFERENCES produto (id_produto), que vincula os produtos registrados na tabela Item_Venda aos seus respectivos registros na tabela Produto.
+
+Essa restrição impede que seja registrado um item de venda com um id_produto inexistente na tabela Produto, garantindo a integridade referencial. Além disso, o mecanismo de armazenamento ENGINE=InnoDB, em conjunto com as chaves estrangeiras, ajuda a preservar a consistência dos dados e a integridade do histórico de vendas e das notas fiscais de entrada.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 4. Seção de BI & IA: 
+
+Análises realizadas por meio de consultas SQL nativas no banco de dados para demonstrar indicadores gerenciais diretamente no sistema, baseados na pesquisa de campo realizada em 31/10/2026:
+ **Ticket médio (Consulta Gerencial nº 5):** Acompanhamento do valor médio das vendas no mês de demonstração para planejamento estratégico.
+ 
+ **Controle de estoque (Consulta Gerencial nº 4):** Identificação em tempo real de produtos que atingiram o `estoque_minimo` e precisam de reposição crítica, como no caso do *Leite 1 L* e do *Pão francês*.
+
+ **Análise de vendas (Consulta Gerencial nº 3):** Identificação da Curva ABC dos produtos mais vendidos em unidades e faturamento, validando a alta saída de pães observada na entrevista.
+
+## 4.1. Inteligência Artificial (IA)
+
+Possibilidades de aplicação de algoritmos de *Machine Learning* integrados nativamente ao ecossistema do projeto:
+
+ **Previsão de demanda:** Análise estatística preditiva sobre a tabela `MOVIMENTACAO_ESTOQUE` para estimar as necessidades das 20 entregas futuras de mercadorias, evitando desperdício de capital.
+ 
+ **Associação de produtos (Algoritmo Apriori):** Mineração dos mais de 2.300 registros da tabela `ITEM_VENDA` para identificar padrões ocultos de consumo cruzado e apoiar estratégias automáticas de *cross-selling* no PDV (Ponto de Venda).
