@@ -58,8 +58,8 @@ Essa restrição impede que seja registrado um item de venda com um id_produto i
 **Consultas G01 a G06 aplicadas às tabelas do script SQL**
 
 **G01-Quantidades de produtos cadastrados:**
-</>SQL
-```sql
+
+```SQL
 SELECT
   COUNT(*) AS total_produtos
 FROM produtos;  
@@ -76,8 +76,7 @@ GROUP BY DATE_FORMAT(data_entrada,'%Y-%m')
 ORDER BY mes;
 ```
 **G03-Quantidades de vendas, faturamento e ticket médio por mês:**
-</>SQL
-```sql
+```SQL
 SELECT
   DATE_FORMAT(data_hora,'%Y-%m')AS mes,
   COUNT(*) AS total_vendas;
@@ -88,8 +87,7 @@ GROUP BY DATE_FORMAT(data_hora,'%Y-%m')
 ORDER BY mes;
 ```
 **G04-Valor total de compras por mês:**
-</>SQL
-```sql
+```SQL
 SELECT
  DATE_FORMAT(data_entrada,'%Y-%m')AS mes,
  SUM(valor_total)AS total_compras
@@ -98,8 +96,7 @@ GROUP BY DATE_FORMAT(data_entrada,'%Y-%m')
 ORDER BY mes;
 ```
 **G05-Produtos que mais vendidos:**
-</>SQL
-```sql
+```SQL
 SELECT 
  p.nome AS produto,
  SUM(iv.quantidade)AS quantidade_vendida
@@ -110,8 +107,7 @@ GROUP BY id_produto, p.nome
 ORDER BY quantidade_vendida DESC;
 ```
 **G06-Produtos que precisam de reposição:**
-</>SQL
-```sql
+```SQL
 SELECT
   nome,
   quantidade_estoque,
