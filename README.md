@@ -40,18 +40,68 @@ Essa restrição impede que seja registrado um item de venda com um id_produto i
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 4. Seção de BI & IA: 
+**Informações**
 
-Análises realizadas por meio de consultas SQL nativas no banco de dados para demonstrar indicadores gerenciais diretamente no sistema, baseados na pesquisa de campo realizada em 31/10/2026:
- **Ticket médio (Consulta Gerencial nº 5):** Acompanhamento do valor médio das vendas no mês de demonstração para planejamento estratégico.
- 
- **Controle de estoque (Consulta Gerencial nº 4):** Identificação em tempo real de produtos que atingiram o `estoque_minimo` e precisam de reposição crítica, como no caso do *Leite 1 L* e do *Pão francês*.
 
- **Análise de vendas (Consulta Gerencial nº 3):** Identificação da Curva ABC dos produtos mais vendidos em unidades e faturamento, validando a alta saída de pães observada na entrevista.
 
-## 4.1. Inteligência Artificial (IA)
 
-Possibilidades de aplicação de algoritmos de *Machine Learning* integrados nativamente ao ecossistema do projeto:
+**Consultas SQL gerenciais**:
+G01 a G06 nas tabelas do script SQL
 
- **Previsão de demanda:** Análise estatística preditiva sobre a tabela `MOVIMENTACAO_ESTOQUE` para estimar as necessidades das 20 entregas futuras de mercadorias, evitando desperdício de capital.
- 
- **Associação de produtos (Algoritmo Apriori):** Mineração dos mais de 2.300 registros da tabela `ITEM_VENDA` para identificar padrões ocultos de consumo cruzado e apoiar estratégias automáticas de *cross-selling* no PDV (Ponto de Venda).
+G01-Quantidades de produtos cadastrados:
+```sql
+SELECT
+  COUNT(*) AS total_produtos
+FROM produtos;  
+```
+
+G02-Quantidades de entrada por mês:
+```sql
+SELECT
+   DATE_FORMA(data_entrada,'%Y-%m')AS mes,
+   COUNT(*) AS total_entradas
+FROM entrada
+GROUP BY DATE_FORMAT(data_entrada,'%Y-%m')
+ORDER BY mes;
+```
+G03-Quantidades de vendas, faturamento e ticket médio por mês:
+```sql
+SELECT
+  DATE_FORMAT(data_hora,'%Y-%m')AS mes,
+  COUNT(*) AS total_vendas;
+  SUM(valor_total)AS faturamento,
+  AVG(valor_total)AS ticket_medio
+FROM venda
+GROUP BY DATE_FORMAT(data_hora,'%Y-%m')
+ORDER BY mes;
+```
+G04-Valor total de compras por mês:
+```sql
+SELECT
+ DATE_FORMAT(data_entrada,'%Y-%m')AS mes,
+ SUM(valor_total)AS total_compras
+FROM entrada
+GROUP DATE_FORMAT(data_entrada,'%Y-%m')
+ORDER BY mes;
+```
+G05-Produtos que mais vendidos:
+```sql
+SELECT 
+ p.nome AS produto,
+ SUM(iv.quantidade)AS quantidade_vendida
+FROM item_vendas AS iv
+INNER JOIN produto AS p
+   ON iv.id_produto=p.id_produto
+GROUP BY id_produto, p.nome
+ORDER BY quantidade_vendida DESC;
+```
+G06-Produtos que precisam de reposição:
+```sql
+SELECT
+  nome,
+  quantidade_estoque,
+  estoque_minimo
+FROM produto
+WHERE quantidade_estoque<=estoque_minimo
+ORDER BY quantidade_estoque ASC, nome;
+```
