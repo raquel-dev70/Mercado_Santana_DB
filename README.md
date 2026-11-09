@@ -74,8 +74,7 @@ FROM produtos;
 ```
 
 **G02-Quantidades de entrada por mês:**
-</>SQL
-```sql
+```SQL
 SELECT
    DATE_FORMAT(data_entrada,'%Y-%m')AS mes,
    COUNT(*) AS total_entradas
