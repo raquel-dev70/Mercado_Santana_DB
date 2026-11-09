@@ -1,3 +1,11 @@
+| Nome completo do aluno | RGM | Usuário do GitHub |
+|---|---|---|
+| Isabella Bonfim Reis | 48837423 | [@isab7fim](https://github.com/isab7fim) |
+| Maria Eduarda Santos Guedes |  48216810 | [@mariaeduardamazuqueli](https://github.com/mariaeduardamazuqueli) |
+| Millena Dias Santana | 47555041 | [@MillenaSantana](https://github.com/MillenaSantana) |
+| Raquel Guimarães Pereira | 47813369 | [@ raquel-dev70](https://github.com/raquel-dev70) |
+| Yasmin Helena Marinho Pinda | 47740981 | [@yasminpinda](https://github.com/yasminpinda) |
+
 ## 1. Justificativas Técnicas da Modelagem — Mercado Santana : 
 O banco de dados foi estruturado com as entidades **Categoria**, **Produto**, **Fornecedor**, **Entrada**, **Item_Entrada**, **Venda**, **Item_Venda** e **Movimentacao_Estoque**. 
 
@@ -18,6 +26,9 @@ Definidas nativamente como inteiros para garantir alta performance nas operaçõ
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 2. Coerência DER vs. Modelo Lógico:
+![DER](Uploading image.png…)
+![MODELO LOGICO](Uploading image.png…)
+
 **O mapeamento das tabelas funcionou?**
 Sim! Nos relacionamentos "refere-se" e "possui", o mapeamento funcionou perfeitamente. O relacionamento "refere-se" serve para ligar as tabelas `Produto`, `Item_Entrada` e `Item_Venda` através de chaves estrangeiras (`FK`), identificando pelo ID qual mercadoria está sendo movimentada. Já o relacionamento "possui" liga a tabela `Venda` com a tabela `Item_Venda`, identificando exatamente em qual cupom fiscal aquela compra foi registrada, não deixando nenhuma informação solta no sistema do mercado.
 
