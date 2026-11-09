@@ -40,22 +40,33 @@ Essa restrição impede que seja registrado um item de venda com um id_produto i
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 4. Seção de BI & IA: 
-**Informações**
+**Informações das tabelas**
+
+       | Informação | Pesquisa de campo | Massa sintética de teste |
+| :--- | :--- | :--- |
+| *Produtos ativos/cadastrados* | Mais de 50; sem contagem exata | 52 produtos |
+| *Entradas por mês* | 20 (anotação) | 20 entradas em outubro/2026 |
+| *Vendas por mês* | 200 (anotação; período/significado a confirmar) | 200 vendas em outubro/2026 |
+| *Faturamento mensal* | Aproximadamente R$ 36.000,00 | R$ 36.257,17 |
+| *Ticket médio* | Não informado | R$ 181,29 |
+| *Valor de compras* | Não informado | R$ 29.079,24 |
+| *Produto de maior giro* | "Pães" | Pão francês: 1.020 unidades vendidas |
+| *Devoluções* | Aproximadamente 12 por mês | Não registradas na massa |
 
 
 
 
 **Consultas SQL gerenciais**:
-G01 a G06 nas tabelas do script SQL
+**G01 a G06 nas tabelas do script SQL**
 
-G01-Quantidades de produtos cadastrados:
+**G01-Quantidades de produtos cadastrados:**
 ```sql
 SELECT
   COUNT(*) AS total_produtos
 FROM produtos;  
 ```
 
-G02-Quantidades de entrada por mês:
+**G02-Quantidades de entrada por mês:**
 ```sql
 SELECT
    DATE_FORMA(data_entrada,'%Y-%m')AS mes,
@@ -64,7 +75,7 @@ FROM entrada
 GROUP BY DATE_FORMAT(data_entrada,'%Y-%m')
 ORDER BY mes;
 ```
-G03-Quantidades de vendas, faturamento e ticket médio por mês:
+**G03-Quantidades de vendas, faturamento e ticket médio por mês:**
 ```sql
 SELECT
   DATE_FORMAT(data_hora,'%Y-%m')AS mes,
@@ -75,7 +86,7 @@ FROM venda
 GROUP BY DATE_FORMAT(data_hora,'%Y-%m')
 ORDER BY mes;
 ```
-G04-Valor total de compras por mês:
+**G04-Valor total de compras por mês:**
 ```sql
 SELECT
  DATE_FORMAT(data_entrada,'%Y-%m')AS mes,
@@ -95,7 +106,7 @@ INNER JOIN produto AS p
 GROUP BY id_produto, p.nome
 ORDER BY quantidade_vendida DESC;
 ```
-G06-Produtos que precisam de reposição:
+**G06-Produtos que precisam de reposição:**
 ```sql
 SELECT
   nome,
