@@ -1,14 +1,20 @@
 ## 1. Justificativas Técnicas da Modelagem — Mercado Santana : 
-Nos banco de dados foi estruturado com as entidades Categoria, Produto, Fornecedor, Entrada, Item_Entrada, Venda, Item_Venda e Movimentacao_Estoque. As entidades Item_Entrada e Item_Venda possuem atributos do tipo FLOAT para representar valores numéricos, como quantidades e valores financeiros. Já as chaves estrangeiras (FK) foram definidas com o tipo INT, permitindo estabelecer os relacionamentos entre as tabelas e garantir a integridade dos dados.
+O banco de dados foi estruturado com as entidades **Categoria**, **Produto**, **Fornecedor**, **Entrada**, **Item_Entrada**, **Venda**, **Item_Venda** e **Movimentacao_Estoque**. 
 
-**1. Movimentacao_Estoque:** É responsável pelo controle das entradas, saídas, custos e demais movimentações dos produtos no estoque.
+As chaves estrangeiras (**FK**) foram integralmente definidas com o tipo `INT` para otimizar os relacionamentos e indexações. Para os atributos numéricos e financeiros, a escolha dos tipos de dados seguiu critérios rigorosos de precisão e integridade, conforme detalhado abaixo:
 
-**1.1 Item_Entrada e Item_Venda:** Representam os itens relacionados às operações de compra e venda, permitindo registrar as quantidades e os valores correspondentes a cada operação.
+### 1.1 Movimentacao_Estoque
+Responsável pelo controle centralizado de entradas, saídas, saldos e custos operacionais. Esta entidade consolida o histórico de fluxo de mercadorias, permitindo auditorias de estoque e cálculos de giro em tempo real.
 
-**1.2 Tipo de dado FLOAT:** Foi utilizado para representar valores numéricos com casas decimais, permitindo registrar quantidades e valores relacionados às operações de compra, venda e movimentação de estoque.
+### 1.2 Item_Entrada e Item_Venda
+Representam as tabelas associativas (N:N) que quebram o relacionamento multinível entre produtos e as operações de compra/venda. Elas isolam o preço histórico praticado no momento exato da transação, blindando o histórico financeiro contra alterações futuras no preço do cadastro do produto.
 
-**1.3 Chaves estrangeiras (FK) do tipo INT:** Foram utilizadas para estabelecer os relacionamentos entre as tabelas por meio dos identificadores correspondentes, permitindo vincular os registros e preservar a integridade referencial do banco de dados.
+### 1.3 Tipos de Dados: DECIMAL vs FLOAT
+*   **DECIMAL (Valores Financeiros):** Para valores monetários (como preço unitário, subtotal e descontos), utilizou-se o tipo `DECIMAL(10,2)`. A escolha evita os problemas crônicos de arredondamento e perda de precisão computacional inerentes ao tipo `FLOAT`.
+*   **FLOAT (Quantidades Fracionadas):** O tipo `FLOAT` foi aplicado estritamente a campos de quantidade de itens que permitem frações (ex: produtos vendidos por quilo ou litro, como panificação e hortifrúti).
 
+### 1.4 Chaves Estrangeiras (FK) do Tipo INT
+Definidas nativamente como inteiros para garantir alta performance nas operações de `JOIN`. A tipagem estrita assegura a **integridade referencial** por meio de restrições (`FOREIGN KEY`), impedindo a criação de registros órfãos e garantindo a consistência dos dados em cascata.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 2. Coerência DER vs. Modelo Lógico:
 **O mapeamento das tabelas funcionou?**
@@ -29,8 +35,9 @@ Utilizamos o tipo **`DECIMAL(10,2)`** em campos como `preco_venda` e `valor_tota
 Foi utilizada a configuração `AUTO_INCREMENT` nas chaves primárias (`PRIMARY KEY`), permitindo que os identificadores sejam gerados automaticamente pelo banco de dados a cada novo registro. Os campos foram definidos com o tipo `INT`, garantindo a identificação única dos registros. Esses identificadores também permitem estabelecer relacionamentos entre as tabelas por meio das chaves estrangeiras (`FOREIGN KEY`), como `id_produto` e `id_venda`.
 
 **3. Padronização de Caracteres e Acentuação:**
-Na tabela Categoria, foi utilizada a configuração DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci, permitindo o armazenamento adequado de caracteres especiais, acentos e diferentes idiomas. O conjunto de caracteres utf8mb4 oferece suporte a uma ampla variedade de caracteres, incluindo letras acentuadas.
-Já a configuração utf8mb4_0900_ai_ci utiliza uma regra de comparação que ignora diferenças entre letras maiúsculas e minúsculas (ci) e diferenças de acentuação (ai). Dessa forma, ao pesquisar uma categoria como Limpeza, o banco de dados também consegue reconhecer variações como limpeza e LIMPEZA, facilitando as consultas e a localização dos registros.
+Na tabela `Categoria`, foi utilizada a configuração `ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci`, permitindo o armazenamento adequado de caracteres especiais, acentos e diferentes idiomas. O conjunto de caracteres `utf8mb4` oferece suporte a uma ampla variedade de dados, incluindo letras acentuadas da língua portuguesa.
+
+A configuração `utf8mb4_0900_ai_ci` utiliza uma regra de comparação que ignora diferenças entre letras maiúsculas e minúsculas (ci) e diferenças de acentuação (ai). Dessa forma, ao pesquisar uma categoria como "Limpeza", o banco de dados também consegue reconhecer variações como "limpeza" e "LIMPEZA", facilitando as consultas e a localização dos registros no sistema.
 
 
 **4. Estrutura de Chaves e Relacionamentos:**
